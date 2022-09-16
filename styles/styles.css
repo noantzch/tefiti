@@ -46,6 +46,10 @@ h6{
     grid-gap: 0.5;
     grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
 }
+.producto{
+    display: flex;
+    justify-content: center;
+}
 .card{
     width: 15em;
 }
