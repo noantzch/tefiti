@@ -17,14 +17,39 @@ for(const producto of lista_productos){
                             </div>`
 }
 //FILTRO
-//capturar el boton y agregarle funcion
-const btn_filtrar = document.getElementById("filtrar")
+
+const btn_filtrar = document.getElementById("btn_filtrar");
+let lista_filtrada = []
+const filtros = document.getElementsByClassName("filtros");
+let filtro_agregado = "";
+let filtos_elegidos = [];
+for(element of filtros){
+    element.addEventListener("change", agregar_filtro)
+}
+function agregar_filtro (e){
+    if(this.checked){
+        filtro_agregado = e.target.value;
+        //filtos_elegidos.push(filtro_agregado);
+        //console.log(filtos_elegidos);
+    }else{
+        filtro_agregado = ""
+    }
+}
 btn_filtrar.addEventListener("click", filtrar);
-//capturo los input del filtro
-const filtros = document.getElementsByClassName("filtros")
-//funcion de filtrado
-function filtrar(e){
-    for(element of filtros){
-        console.log(element.)
+function filtrar(){
+    lista_filtrada = lista_productos.filter((el) => el.tipo.includes(filtro_agregado));
+    productos.innerHTML = ``
+    for(const object of lista_filtrada){
+        const div_producto = document.createElement('div');
+        div_producto.className = "producto";
+        productos.append(div_producto);
+        div_producto.innerHTML =`<div class="card">
+                                    <img src="${object.ubicacion_imagen}" class="card-img-top imgproducto" alt="producto">
+                                    <div class="card-body">
+                                        <h6 class="card-title">${object.nombre}</h6>
+                                        <p class="card-text">Precio: $ ${object.precio}</p>
+                                        <a href="#carrito_total" type="button" class="btn btn-primary" id="${object.codigo}">Agregar</a>
+                                    </div>
+                                </div>`
     }
 }
