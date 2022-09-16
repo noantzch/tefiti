@@ -41,22 +41,22 @@ btn_filtrar.addEventListener("click", filtrar);
 function filtrar(){
     productos.innerHTML = ``
     if(filtros_elegidos.length > 0){
-    for(element of filtros_elegidos){
-    lista_filtrada = lista_productos.filter((el) => el.tipo.includes(element));
-    for(const object of lista_filtrada){
-        const div_producto = document.createElement('div');
-        div_producto.className = "producto";
-        productos.append(div_producto);
-        div_producto.innerHTML =`<div class="card">
-                                    <img src="${object.ubicacion_imagen}" class="card-img-top imgproducto" alt="producto">
-                                    <div class="card-body">
-                                        <h6 class="card-title">${object.nombre}</h6>
-                                        <p class="card-text">Precio: $ ${object.precio}</p>
-                                        <a href="#carrito_total" type="button" class="btn btn-primary" id="${object.codigo}">Agregar</a>
-                                    </div>
-                                </div>`
-    }
-    }
+        for(element of filtros_elegidos){
+            lista_filtrada = lista_productos.filter((el) => el.tipo.includes(element));
+            for(const object of lista_filtrada){
+                const div_producto = document.createElement('div');
+                div_producto.className = "producto";
+                productos.append(div_producto);
+                div_producto.innerHTML =`<div class="card">
+                                            <img src="${object.ubicacion_imagen}" class="card-img-top imgproducto" alt="producto">
+                                            <div class="card-body">
+                                                <h6 class="card-title">${object.nombre}</h6>
+                                                <p class="card-text">Precio: $ ${object.precio}</p>
+                                                <a href="#carrito_total" type="button" class="btn btn-primary" id="${object.codigo}">Agregar</a>
+                                            </div>
+                                        </div>`
+                }
+        }
     }else{
         for(const producto of lista_productos){
             const div_producto = document.createElement('div');
