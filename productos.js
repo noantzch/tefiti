@@ -30,46 +30,80 @@ function agregar_filtro (e){
     if(this.checked){
         filtro_agregado = e.target.value;
         filtros_elegidos.push(filtro_agregado);
-    }else{
-        filtro_agregado = e.target.value;
-        let index = filtros_elegidos.indexOf(filtro_agregado);
-        filtros_elegidos.splice(index, 1);
-        filtro_agregado = ""
-    }
-}
-btn_filtrar.addEventListener("click", filtrar);
-function filtrar(){
-    productos.innerHTML = ``
-    if(filtros_elegidos.length > 0){
-        for(element of filtros_elegidos){
-            lista_filtrada = lista_productos.filter((el) => el.tipo.includes(element));
-            for(const object of lista_filtrada){
+
+        productos.innerHTML = ``
+        if(filtros_elegidos.length > 0){
+            for(element of filtros_elegidos){
+                lista_filtrada = lista_productos.filter((el) => el.tipo.includes(element));
+                for(const object of lista_filtrada){
+                    const div_producto = document.createElement('div');
+                    div_producto.className = "producto";
+                    productos.append(div_producto);
+                    div_producto.innerHTML =`<div class="card">
+                                                <img src="${object.ubicacion_imagen}" class="card-img-top imgproducto" alt="producto">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">${object.nombre}</h6>
+                                                    <p class="card-text">Precio: $ ${object.precio}</p>
+                                                    <a href="#carrito_total" type="button" class="btn btn-primary" id="${object.codigo}">Agregar</a>
+                                                </div>
+                                            </div>`
+                    }
+            }
+        }else{
+            for(const producto of lista_productos){
                 const div_producto = document.createElement('div');
                 div_producto.className = "producto";
                 productos.append(div_producto);
                 div_producto.innerHTML =`<div class="card">
-                                            <img src="${object.ubicacion_imagen}" class="card-img-top imgproducto" alt="producto">
+                                            <img src="${producto.ubicacion_imagen}" class="card-img-top imgproducto" alt="producto">
                                             <div class="card-body">
-                                                <h6 class="card-title">${object.nombre}</h6>
-                                                <p class="card-text">Precio: $ ${object.precio}</p>
-                                                <a href="#carrito_total" type="button" class="btn btn-primary" id="${object.codigo}">Agregar</a>
+                                                <h6 class="card-title">${producto.nombre}</h6>
+                                                <p class="card-text">Precio: $ ${producto.precio}</p>
+                                                <a href="#carrito_total" type="button" class="btn btn-primary" id="${producto.codigo}">Agregar</a>
                                             </div>
                                         </div>`
-                }
+            }
         }
+
     }else{
-        for(const producto of lista_productos){
-            const div_producto = document.createElement('div');
-            div_producto.className = "producto";
-            productos.append(div_producto);
-            div_producto.innerHTML =`<div class="card">
-                                        <img src="${producto.ubicacion_imagen}" class="card-img-top imgproducto" alt="producto">
-                                        <div class="card-body">
-                                            <h6 class="card-title">${producto.nombre}</h6>
-                                            <p class="card-text">Precio: $ ${producto.precio}</p>
-                                            <a href="#carrito_total" type="button" class="btn btn-primary" id="${producto.codigo}">Agregar</a>
-                                        </div>
-                                    </div>`
+        filtro_agregado = e.target.value;
+        let index = filtros_elegidos.indexOf(filtro_agregado);
+        filtros_elegidos.splice(index, 1);
+
+        productos.innerHTML = ``
+        if(filtros_elegidos.length > 0){
+            for(element of filtros_elegidos){
+                lista_filtrada = lista_productos.filter((el) => el.tipo.includes(element));
+                for(const object of lista_filtrada){
+                    const div_producto = document.createElement('div');
+                    div_producto.className = "producto";
+                    productos.append(div_producto);
+                    div_producto.innerHTML =`<div class="card">
+                                                <img src="${object.ubicacion_imagen}" class="card-img-top imgproducto" alt="producto">
+                                                <div class="card-body">
+                                                    <h6 class="card-title">${object.nombre}</h6>
+                                                    <p class="card-text">Precio: $ ${object.precio}</p>
+                                                    <a href="#carrito_total" type="button" class="btn btn-primary" id="${object.codigo}">Agregar</a>
+                                                </div>
+                                            </div>`
+                    }
+            }
+        }else{
+            for(const producto of lista_productos){
+                const div_producto = document.createElement('div');
+                div_producto.className = "producto";
+                productos.append(div_producto);
+                div_producto.innerHTML =`<div class="card">
+                                            <img src="${producto.ubicacion_imagen}" class="card-img-top imgproducto" alt="producto">
+                                            <div class="card-body">
+                                                <h6 class="card-title">${producto.nombre}</h6>
+                                                <p class="card-text">Precio: $ ${producto.precio}</p>
+                                                <a href="#carrito_total" type="button" class="btn btn-primary" id="${producto.codigo}">Agregar</a>
+                                            </div>
+                                        </div>`
+            }
         }
+
+        filtro_agregado = ""
     }
 }
