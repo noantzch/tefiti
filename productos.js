@@ -22,23 +22,27 @@ const btn_filtrar = document.getElementById("btn_filtrar");
 let lista_filtrada = []
 const filtros = document.getElementsByClassName("filtros");
 let filtro_agregado = "";
-let filtos_elegidos = [];
+let filtros_elegidos = [];
 for(element of filtros){
     element.addEventListener("change", agregar_filtro)
 }
 function agregar_filtro (e){
     if(this.checked){
         filtro_agregado = e.target.value;
-        //filtos_elegidos.push(filtro_agregado);
-        //console.log(filtos_elegidos);
+        filtros_elegidos.push(filtro_agregado);
     }else{
+        filtro_agregado = e.target.value;
+        let index = filtros_elegidos.indexOf(filtro_agregado);
+        filtros_elegidos.splice(index, 1);
         filtro_agregado = ""
     }
 }
 btn_filtrar.addEventListener("click", filtrar);
 function filtrar(){
-    lista_filtrada = lista_productos.filter((el) => el.tipo.includes(filtro_agregado));
     productos.innerHTML = ``
+    if(filtros_elegidos.length > 0){
+    for(element of filtros_elegidos){
+    lista_filtrada = lista_productos.filter((el) => el.tipo.includes(element));
     for(const object of lista_filtrada){
         const div_producto = document.createElement('div');
         div_producto.className = "producto";
@@ -51,5 +55,21 @@ function filtrar(){
                                         <a href="#carrito_total" type="button" class="btn btn-primary" id="${object.codigo}">Agregar</a>
                                     </div>
                                 </div>`
+    }
+    }
+    }else{
+        for(const producto of lista_productos){
+            const div_producto = document.createElement('div');
+            div_producto.className = "producto";
+            productos.append(div_producto);
+            div_producto.innerHTML =`<div class="card">
+                                        <img src="${producto.ubicacion_imagen}" class="card-img-top imgproducto" alt="producto">
+                                        <div class="card-body">
+                                            <h6 class="card-title">${producto.nombre}</h6>
+                                            <p class="card-text">Precio: $ ${producto.precio}</p>
+                                            <a href="#carrito_total" type="button" class="btn btn-primary" id="${producto.codigo}">Agregar</a>
+                                        </div>
+                                    </div>`
+        }
     }
 }
