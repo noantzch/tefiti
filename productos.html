@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Los mejores productos naturales veganos en Salta">
+    <meta name="keywords" content="vegano, natural, cremas, dental, cepillos, shampoo en barra, pastillas">
+    <link rel="shortcut icon" href="images/tefiti_logo_sintexto.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles/styles.css">
+    <title>TEFITI - Productos</title>
+</head>
+<body>
+    <!-- BARA DE NAVEGACION-->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <img src="./images/tefiti_logo_sintexto.png" id="logo">
+        <a class="navbar-brand" href="index.html" id="tefiti">Tefiti</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Inicio </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Productos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Quienes somos</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Contacto</a>
+                </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+
+
+<main>
+    <section>
+        <h1>Productos</h1>
+        <!--filtro-->
+            <div id="filtro_container">
+                <div class="form-check form-check-inline">
+                    <button type="button" class="btn btn-dark" id="filtrar">Filtrar</button>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input filtros" type="checkbox" value="Sahumerios">
+                    <label class="form-check-label">Sahumerios</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input filtros" type="checkbox" value="Cuidado_Facial">
+                    <label class="form-check-label">Cuidado facial</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input filtros" type="checkbox" value="Cuidado_Corporal">
+                    <label class="form-check-label">Cuidado corporal</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input filtros" type="checkbox" value="Cuidado_Dental">
+                    <label class="form-check-label">Cuidado dental</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input filtros" type="checkbox" value="Utilidades">
+                    <label class="form-check-label">Utilidades</label>
+                </div>
+            </div>
+        <!--lista de productos por js-->
+        <div id="productos"></div>
+    </section>
+</main>
+<footer>
+    <p>Tefiti - Natural</p>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="stock.js"></script>
+    <script src="productos.js"></script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+@font-face {
+    font-family: BeautySmile;
+    src: url(../fonts/BeautySmile.otf);
+}
+@font-face {
+    font-family: AmaticBold;
+    src: url(../fonts/AmaticSC-Bold.ttf);
+}
+@font-face {
+    font-family: GlacialIndifference;
+    src: url(../fonts/GlacialIndifference-Regular.otf);
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: GlacialIndifference;
+}
+#tefiti{
+    font-family: BeautySmile;
+    font-size: 2.5em;
+}
+#logo{
+    width: 2.5em;
+}
+#saludo{
+    text-align: center;
+
+
+}
+h1{
+    font-family: AmaticBold;
+    padding: 0.2em;
+    text-align: center;
+    font-size: 4em;
+    font-weight: bolder;
+}
+h6{
+    font-weight: bold;
+}
+
+#productos{
+    margin: 0.2em;
+    display: grid;
+    grid-auto-rows: 25em;
+    grid-gap: 0.5;
+    grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+}
+.card{
+    width: 15em;
+}
+.btn{
+    padding: 0.2em;
+}
+.btn-primary{
+    background-color: #04c494;
+    border-color: #04bc94;
+}
+#filtro_container{
+    text-align: center;
+    padding: 1.5em;
+}
+@media (max-width: 768px) {
+    #filtro_container{
+        display: inline-flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+    }
+}
+.form-check-input:checked {
+    background-color: #04547c;
+    border-color: #04547c;
+}
