@@ -16,27 +16,46 @@
     box-sizing: border-box;
     font-family: GlacialIndifference;
 }
+.navbar{
+    padding: 0;
+    margin: 0;
+    position: fixed;
+    width: 100%;
+}
 #tefiti{
     font-family: BeautySmile;
-    font-size: 2.5em;
+    font-size: 2em;
+    color: #04547c;
 }
 #logo{
-    width: 2.5em;
+    width: 1.8em;
 }
-#saludo{
-    text-align: center;
-
-
+#productos_container{
+    padding-top: 4em;
 }
 h1{
     font-family: AmaticBold;
     padding: 0.2em;
+    padding-bottom: 0.01em;
     text-align: center;
     font-size: 4em;
     font-weight: bolder;
+    letter-spacing: 0.1em;
 }
 h6{
     font-weight: bold;
+}
+#btn_carrito{
+    font-size: 1.8em;
+}
+
+@media (max-width: 768px){
+
+    #btn_carrito{
+	    position:absolute;
+	    top: 0;
+	    right: 2.4em;
+    }
 }
 
 #productos{
@@ -52,6 +71,7 @@ h6{
 }
 .card{
     width: 15em;
+    position:unset;
 }
 .btn{
     padding: 0.2em;
@@ -62,7 +82,7 @@ h6{
 }
 #filtro_container{
     text-align: center;
-    padding: 1.5em;
+    padding: 1.1em;
 }
 @media (max-width: 768px) {
     #filtro_container{
@@ -75,4 +95,61 @@ h6{
 .form-check-input:checked {
     background-color: #04bc94;
     border-color: #04bc94;
+}
+/*CARRITO*/
+.nomostrar{
+    display: none;
+}
+.mostrar{
+    position: fixed;
+    top: 3.7em;
+    right: 0;
+    height: 100%;
+    padding: 0;
+    padding-top: 2rem;
+    background-color: #04bc94;
+    color: white;
+    max-width: 25%;
+    min-width: 25%;
+}
+@media (max-width: 768px) {
+    .mostrar{
+        max-width: 80%;
+        min-width: 80%;  
+    }
+}
+#contenedor_carrito{
+    color: white;
+    text-align: center;
+    padding: 0;
+}
+.imagen_producto_elegido{
+    width: 4em;
+}
+#carrito{
+    margin: auto;
+    text-align: center;
+    padding: 0;
+}
+td{
+    padding-right: 0.5em;
+    padding-left: 0.5em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    font-size: 1.2em;
+}
+
+.btn-danger{
+    font-size: 1em;
+}
+@media (max-width: 768px){
+    td{
+        font-size: 0.7em; 
+    }
+    .btn-danger{
+        font-size: 1em;
+    }
+}
+#carrito_total{
+    font-weight: bolder;
 }
