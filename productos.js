@@ -119,7 +119,7 @@ function agregar_filtro (e){
         }
     }
 }
-
+//CARRITO
 //boton de carrito
 let btn_carrito = document.getElementById("btn_carrito");
 let carritoInner = document.getElementById("carritoInner");
@@ -140,7 +140,6 @@ btn_carrito.addEventListener("click", function(e){
     }
 })
 
-//CARRITO
 //capturo tabla del html donde iran los productos elegidos
 const carrito = document.getElementById("carrito")
 //creo un arreglo donde irán los precios de cada producto para sumarse al final 
@@ -154,7 +153,7 @@ function agregar(e){
         carrito.append(tr_producto_elegido);
         tr_producto_elegido.innerHTML = 
             `<td><img class="imagen_producto_elegido" src="${producto.ubicacion_imagen}"></img></td>
-            <td>${producto.nombre} </td>
+            <td>${producto.nombre}</td>
             <td>$${producto.precio}</td>
             <td> <button class="btn btn-danger btn_eliminar" value="${producto.precio}">Eliminar</button> </td>`
         //agrego el precio al arreglo subtotal
@@ -162,7 +161,16 @@ function agregar(e){
         //cambio el texto donde va el calculo total, poninendo el return de la funcion que lo calcula
         let precio_total = document.getElementById("precio_total");
         precio_total.innerText = "$" + calculo_total();
+        //notificacion
+        Toastify({
+            text: "Agregaste un producto al carrito",
+            duration: 1500,
+            style: {
+                background: "#04547c",
+            }
+        }) .showToast();
         }
+        //funcion al boton agregar
         let botones_eliminar = document.getElementsByClassName("btn_eliminar");
         for(let element of botones_eliminar){
             element.addEventListener("click", eliminar);
@@ -192,5 +200,14 @@ function eliminar(e){
     //cambio el texto donde va el calculo total, poninendo el return de la funcion que lo calcula
     let precio_total = document.getElementById("precio_total");
     precio_total.innerText = "$" + calculo_total();
+
+    //notificacion
+    Toastify({
+        text: "Eliminaste un producto del carrito",
+        duration: 1500,
+        style: {
+            background: "red",
+        }
+    }) .showToast();
 }
 
