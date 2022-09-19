@@ -1,3 +1,30 @@
+//CARRITO
+//boton de carrito
+let btn_carrito = document.getElementById("btn_carrito");
+let carritoInner = document.getElementById("carritoInner");
+let contador_clicks = 0;
+btn_carrito.addEventListener("click", function(e){
+    if(contador_clicks == 0){
+        carritoInner.classList.remove("nomostrar")
+        carritoInner.classList.add("mostrar")
+        btn_carrito.classList.remove("bi-cart")
+        btn_carrito.classList.add("bi-cart-x")
+        contador_clicks++;
+    }else{
+        carritoInner.classList.remove("mostrar")
+        carritoInner.classList.add("nomostrar")
+        btn_carrito.classList.remove("bi-cart-x")
+        btn_carrito.classList.add("bi-cart")
+        contador_clicks = 0;
+    }
+})
+
+//capturo tabla del html donde iran los productos elegidos
+const carrito = document.getElementById("carrito")
+//creo un arreglo donde irán los precios de cada producto para sumarse al final 
+let subtotal = [];
+//areglo storage
+let storage = [];
 //arreglo con los productos
 let lista_productos = [sah_duo, sah_energia, sah_chico, sah_sahumo, sah_sahumoespecial, sah_natural, sah_palo, sah_chackras, uti_botellas, cfac_aceitealmendras, uti_sorbetes, cfac_cremakarite, cfac_cremaalmendras, ccor_cremamango, cfac_cremacacao, cden_base, cden_pastapolvo];
 //capturar div del html donde serán imprimidos
@@ -16,6 +43,7 @@ for(const producto of lista_productos){
                                 </div>
                             </div>`
 }
+
 //agrego funcion al "a" generados en el for anterior
 let botones = document.getElementsByClassName("boton_agregar");
 for(let element of botones){
@@ -106,7 +134,7 @@ function agregar_filtro (e){
                                             <div class="card-body">
                                                 <h6 class="card-title">${producto.nombre}</h6>
                                                 <p class="card-text">Precio: $ ${producto.precio}</p>
-                                                <a href="#carrito_total" type="button" class="btn btn-primary boton_agregar" id="${producto.codigo}">Agregar</a>
+                                                <a href="#carrito_total" type="button" class="btn btn-primary boton_agregar">Agregar</a>
                                             </div>
                                         </div>`
             }
@@ -119,31 +147,6 @@ function agregar_filtro (e){
         }
     }
 }
-//CARRITO
-//boton de carrito
-let btn_carrito = document.getElementById("btn_carrito");
-let carritoInner = document.getElementById("carritoInner");
-let contador_clicks = 0;
-btn_carrito.addEventListener("click", function(e){
-    if(contador_clicks == 0){
-        carritoInner.classList.remove("nomostrar")
-        carritoInner.classList.add("mostrar")
-        btn_carrito.classList.remove("bi-cart")
-        btn_carrito.classList.add("bi-cart-x")
-        contador_clicks++;
-    }else{
-        carritoInner.classList.remove("mostrar")
-        carritoInner.classList.add("nomostrar")
-        btn_carrito.classList.remove("bi-cart-x")
-        btn_carrito.classList.add("bi-cart")
-        contador_clicks = 0;
-    }
-})
-
-//capturo tabla del html donde iran los productos elegidos
-const carrito = document.getElementById("carrito")
-//creo un arreglo donde irán los precios de cada producto para sumarse al final 
-let subtotal = [];
 //funcion agregar al carrito
 function agregar(e){
     for(const producto of lista_productos){
@@ -155,7 +158,7 @@ function agregar(e){
             `<td><img class="imagen_producto_elegido" src="${producto.ubicacion_imagen}"></img></td>
             <td>${producto.nombre}</td>
             <td>$${producto.precio}</td>
-            <td> <button class="btn btn-danger btn_eliminar" value="${producto.precio}">Eliminar</button> </td>`
+            <td> <button class="btn btn-danger btn_eliminar" value="${producto.precio}" id="${producto.codigo}">Eliminar</button> </td>`
         //agrego el precio al arreglo subtotal
         subtotal.push(producto.precio);
         //cambio el texto donde va el calculo total, poninendo el return de la funcion que lo calcula
@@ -169,6 +172,10 @@ function agregar(e){
                 background: "#04547c",
             }
         }) .showToast();
+        //agregar al storage
+        let producto_elegido = {nombre:producto.nombre, precio:producto.precio, ubicacion_imagen:producto.ubicacion_imagen, codigo:producto.codigo}
+        storage.push(producto_elegido);
+        sessionStorage.setItem("productos_elegidos", JSON.stringify(storage))
         }
         //funcion al boton agregar
         let botones_eliminar = document.getElementsByClassName("btn_eliminar");
@@ -177,6 +184,33 @@ function agregar(e){
         }
     }
 }
+
+//agrego al carrito los productos que esten en el session storage si es el caso
+let storage_recuperado = JSON.parse(sessionStorage.getItem("productos_elegidos"));
+for(const producto of storage_recuperado){
+    const tr_producto_elegido = document.createElement('tr');    
+    carrito.append(tr_producto_elegido);
+    tr_producto_elegido.innerHTML = 
+        `<td><img class="imagen_producto_elegido" src="${producto.ubicacion_imagen}"></img></td>
+        <td>${producto.nombre}</td>
+        <td>$${producto.precio}</td>
+        <td> <button class="btn btn-danger btn_eliminar" value="${producto.precio}" id="${producto.codigo}">Eliminar</button> </td>`
+    //agrego el precio al arreglo subtotal
+    subtotal.push(producto.precio);
+    //cambio el texto donde va el calculo total, poninendo el return de la funcion que lo calcula
+    let precio_total = document.getElementById("precio_total");
+    precio_total.innerText = "$" + calculo_total();
+    //agregar al storage
+    let producto_elegido = {nombre:producto.nombre, precio:producto.precio, ubicacion_imagen:producto.ubicacion_imagen, codigo:producto.codigo}
+    storage.push(producto_elegido);
+    sessionStorage.setItem("productos_elegidos", JSON.stringify(storage))
+    //funcion al boton agregar
+    let botones_eliminar = document.getElementsByClassName("btn_eliminar");
+    for(let element of botones_eliminar){
+        element.addEventListener("click", eliminar);
+    }
+}
+
 //funcion que suma los precios en el arreglo subtotal
 function calculo_total(){
     let resultado_total = 0;
@@ -185,9 +219,24 @@ function calculo_total(){
     }
     return resultado_total
 }
-//funcion para eliminar del carrito
+//funcion para ELIMINAR del carrito
 function eliminar(e){
     
+    //eliminar del arreglo storage
+    codigo_para_eliminar = e.target.id
+    for(const producto of lista_productos){
+        if(codigo_para_eliminar == producto.codigo){
+            let nombre_para_eliminar = producto.nombre;
+            for(const element of storage){
+                if(nombre_para_eliminar == element.nombre){
+                    let i = storage.indexOf(element);
+                    storage.splice(i,1);
+                }
+            }
+        }
+    }
+    sessionStorage.setItem("productos_elegidos", JSON.stringify(storage))
+
     //capturo el nodo donde esta toda la info del producto y elimino
     let abuelo = e.target.parentNode.parentNode
     abuelo.remove()
