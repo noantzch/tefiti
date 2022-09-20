@@ -1,0 +1,122 @@
+[
+    {
+        "codigo": 1,
+        "nombre": "Sahumerio Dúo",
+        "tipo": "Sahumerios",
+        "precio": 500,
+        "ubicacion_imagen": "./images/sahumerios/saumerioduo_limpieza&armonia.png"
+    },
+    {
+        "codigo": 2,
+        "nombre": "Sahumerio Energía Limpia",
+        "tipo": "Sahumerios",
+        "precio": 500,
+        "ubicacion_imagen": "./images/sahumerios/saumerioenergia_armonizar.png"
+    },
+    {
+        "codigo": 3,
+        "nombre": "Sahumerio Chico",
+        "tipo": "Sahumerios",
+        "precio": 300,
+        "ubicacion_imagen": "./images/sahumerios/sahumo_chico.jpg"
+    },
+    {
+        "codigo": 4,
+        "nombre": "Sahumos",
+        "tipo": "Sahumerios",
+        "precio": 500,
+        "ubicacion_imagen": "./images/sahumerios/sahumo_mirra&palosanto.jpg"
+    },
+    {
+        "codigo": 5,
+        "nombre": "Sahumos Especiales",
+        "tipo": "Sahumerios",
+        "precio": 600,
+        "ubicacion_imagen": "./images/sahumerios/sahumo_10hierbas.JPG"
+    },
+    {
+        "codigo": 6,
+        "nombre": "Sahumerios Naturales",
+        "tipo": "Sahumerios",
+        "precio": 5400,
+        "ubicacion_imagen": "./images/sahumerios/sahumerio_inciensonatural.png"
+    },
+    {
+        "codigo": 7,
+        "nombre": "Sahumerios de Palo Santo",
+        "tipo": "Sahumerios",
+        "precio": 400,
+        "ubicacion_imagen": "./images/sahumerios/palosanto.jpg"
+    },
+    {
+        "codigo": 8,
+        "nombre": "Sahumerios 7 Chakras",
+        "tipo": "Sahumerios",
+        "precio": 500,
+        "ubicacion_imagen": "./images/sahumerios/sahumo_7chakras.png"
+    },
+    {
+        "codigo": 9,
+        "nombre": "Botellas",
+        "tipo": "Utilidades",
+        "precio": 6000,
+        "ubicacion_imagen": "./images/botellas/botella_roja.jpg"
+    },
+    {
+        "codigo": 10,
+        "nombre": "Aceite de Almendras",
+        "tipo": "Cuidado_Facial",
+        "precio": 800,
+        "ubicacion_imagen": "./images/New folder/aceite_almendras.jpeg"
+    },
+    {
+        "codigo": 11,
+        "nombre": "Kit de sorbetes de Acero",
+        "tipo": "Utilidades",
+        "precio": 500,
+        "ubicacion_imagen": "./images/otros/sorbetes.jpeg"
+    },
+    {
+        "codigo": 12,
+        "nombre": "Crema nocturna de Karité y Jojoba",
+        "tipo": "Cuidado_Facial",
+        "precio": 2300,
+        "ubicacion_imagen": "./images/cuidado_facial/crema_karite.jpeg"
+    },
+    {
+        "codigo": 13,
+        "nombre": "Crema diurna de Almendras",
+        "tipo": "Cuidado_Facial",
+        "precio": 2200,
+        "ubicacion_imagen": "./images/cuidado_facial/crema_almendras.jpeg"
+    },
+    {
+        "codigo": 14,
+        "nombre": "Crema de Mango",
+        "tipo": "Cuidado_Corporal",
+        "precio": 1900,
+        "ubicacion_imagen": "./images/cuidado_corporal/crema_mango.jpeg"
+    },
+    {
+        "codigo": 15,
+        "nombre": "Crema de Cacao y Argán",
+        "tipo": "Cuidado_Facial",
+        "precio": 1700,
+        "ubicacion_imagen": "./images/cuidado_facial/crema_cacao.jpeg"
+    },
+    {
+        "codigo": 16,
+        "nombre": "Base para Cepillo de Dientes",
+        "tipo": "Cuidado_Dental",
+        "precio": 500,
+        "ubicacion_imagen": "./images/cuidado_dental/base_cepillos.jpeg"
+    },
+    {
+        "codigo": 17,
+        "nombre": "Pasta de Dientes en Polvo",
+        "tipo": "Cuidado_Dental",
+        "precio": 700,
+        "ubicacion_imagen": "./images/cuidado_dental/pastadientes_polvo.jpeg"
+    }
+    
+]

@@ -23,32 +23,41 @@ btn_carrito.addEventListener("click", function(e){
 const carrito = document.getElementById("carrito")
 //creo un arreglo donde irán los precios de cada producto para sumarse al final 
 let subtotal = [];
-//areglo storage
+//areglo para el storage
 let storage = [];
-//arreglo con los productos
-let lista_productos = [sah_duo, sah_energia, sah_chico, sah_sahumo, sah_sahumoespecial, sah_natural, sah_palo, sah_chackras, uti_botellas, cfac_aceitealmendras, uti_sorbetes, cfac_cremakarite, cfac_cremaalmendras, ccor_cremamango, cfac_cremacacao, cden_base, cden_pastapolvo];
-//capturar div del html donde serán imprimidos
-const productos = document.getElementById('productos');
-//impresion de cada producto con un for
-for(const producto of lista_productos){
-    const div_producto = document.createElement('div');
-    div_producto.className = "producto";
-    productos.append(div_producto);
-    div_producto.innerHTML =`<div class="card">
-                                <img src="${producto.ubicacion_imagen}" class="card-img-top imgproducto" alt="producto">
-                                <div class="card-body">
-                                    <h6 class="card-title">${producto.nombre}</h6>
-                                    <p class="card-text">Precio: $ ${producto.precio}</p>
-                                    <a href="#carrito_total" type="button" class="btn btn-primary boton_agregar" id="${producto.codigo}">Agregar</a>
-                                </div>
-                            </div>`
-}
 
-//agrego funcion al "a" generados en el for anterior
-let botones = document.getElementsByClassName("boton_agregar");
-for(let element of botones){
-    element.addEventListener("click", agregar);
-}
+//impresion en el html de los productos mediante FETCH
+let lista_productos = [];
+fetch("stock.json")
+    .then((res) => res.json())
+    .then((data) => {
+        data.forEach( (producto) => {
+            lista_productos.push(producto)
+        })
+        //capturar div del html donde serán imprimidos
+        const productos = document.getElementById('productos');
+        //impresion de cada producto con un for
+        for(const producto of lista_productos){
+            const div_producto = document.createElement('div');
+            div_producto.className = "producto";
+            productos.append(div_producto);
+            div_producto.innerHTML =`<div class="card">
+                                        <img src="${producto.ubicacion_imagen}" class="card-img-top imgproducto" alt="producto">
+                                        <div class="card-body">
+                                            <h6 class="card-title">${producto.nombre}</h6>
+                                            <p class="card-text">Precio: $ ${producto.precio}</p>
+                                            <a href="#carrito_total" type="button" class="btn btn-primary boton_agregar" id="${producto.codigo}">Agregar</a>
+                                        </div>
+                                    </div>`
+        }
+
+        //agrego funcion al "a" generados en el for anterior
+        let botones = document.getElementsByClassName("boton_agregar");
+        for(let element of botones){
+            element.addEventListener("click", agregar);
+        }
+    })
+
 //FILTRO
 
 const btn_filtrar = document.getElementById("btn_filtrar");
