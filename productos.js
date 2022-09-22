@@ -59,15 +59,19 @@ fetch("stock.json")
     })
 
 //FILTRO
-
-const btn_filtrar = document.getElementById("btn_filtrar");
+//creo un arreglo donde irán los productos que se imprimiran en pantalla, ya filtrados
 let lista_filtrada = []
+//hago un arreglo donde van todos los checkbox de filtro, para aplicarle la función
 const filtros = document.getElementsByClassName("filtros");
+//variable para el filtro cuando sea seleccionado
 let filtro_agregado = "";
+//arreglo donde irán los filtros elegidos
 let filtros_elegidos = [];
+//agrego la función a los checkbox
 for(element of filtros){
     element.addEventListener("change", agregar_filtro)
 }
+//funcion, agregar el filtro agregado al arreglo de filtros, luego en un for, aplicar filter para ver si concuerda con el tipo de la lista_productos y así imprimirlos en pantalla
 function agregar_filtro (e){
     if(this.checked){
         filtro_agregado = e.target.value;
@@ -112,10 +116,12 @@ function agregar_filtro (e){
             element.addEventListener("click", agregar);
         }
     }else{
+    //cuando se saca el tilde del checkbox buscar el index del filtro en el arreglo de filtros y aplicarle splice, así cuando haga el for ya no se lo cuente.
         filtro_agregado = e.target.value;
         let index = filtros_elegidos.indexOf(filtro_agregado);
         filtros_elegidos.splice(index, 1);
         productos.innerHTML = ``
+
         if(filtros_elegidos.length > 0){
             for(element of filtros_elegidos){
                 lista_filtrada = lista_productos.filter((el) => el.tipo.includes(element));
@@ -143,7 +149,7 @@ function agregar_filtro (e){
                                             <div class="card-body">
                                                 <h6 class="card-title">${producto.nombre}</h6>
                                                 <p class="card-text">Precio: $ ${producto.precio}</p>
-                                                <a href="#carrito_total" type="button" class="btn btn-primary boton_agregar">Agregar</a>
+                                                <a href="#carrito_total" type="button" class="btn btn-primary boton_agregar" id="${producto.codigo}">Agregar</a>
                                             </div>
                                         </div>`
             }
