@@ -111,6 +111,8 @@ h6{
     color: white;
     max-width: 25%;
     min-width: 25%;
+    animation: slideInRight;
+    animation-duration: 1s;
 }
 @media (max-width: 768px) {
     .mostrar{
