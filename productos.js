@@ -202,7 +202,7 @@ function agregar(e){
 
 //agrego al carrito los productos que esten en el session storage si es el caso
 let storage_recuperado = JSON.parse(sessionStorage.getItem("productos_elegidos"));
-if(typeof(storage_recuperado) == "object"){
+if(storage_recuperado != null){
     for(const producto of storage_recuperado){
         const tr_producto_elegido = document.createElement('tr');    
         carrito.append(tr_producto_elegido);
