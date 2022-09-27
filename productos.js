@@ -162,11 +162,11 @@ function agregar_filtro (e){
         }
     }
 }
-//funcion agregar al carrito
-function agregar(e){
-    for(const producto of lista_productos){
-        //comparo el id que se puso antes en funcion del codigo de cada producto para acceder al producto elegido
-        if(e.target.id == producto.codigo){
+
+//agrego al carrito los productos que esten en el session storage si es el caso
+let storage_recuperado = JSON.parse(sessionStorage.getItem("productos_elegidos"));
+if(storage_recuperado != null){
+    for(const producto of storage_recuperado){
         const tr_producto_elegido = document.createElement('tr');    
         carrito.append(tr_producto_elegido);
         tr_producto_elegido.innerHTML = 
@@ -179,19 +179,10 @@ function agregar(e){
         //cambio el texto donde va el calculo total, poninendo el return de la funcion que lo calcula
         let precio_total = document.getElementById("precio_total");
         precio_total.innerText = "$" + calculo_total();
-        //notificacion
-        Toastify({
-            text: "Agregaste un producto al carrito",
-            duration: 1500,
-            style: {
-                background: "#04547c",
-            }
-        }) .showToast();
         //agregar al storage
         let producto_elegido = {nombre:producto.nombre, precio:producto.precio, ubicacion_imagen:producto.ubicacion_imagen, codigo:producto.codigo}
         storage.push(producto_elegido);
         sessionStorage.setItem("productos_elegidos", JSON.stringify(storage))
-        }
         //funcion al boton agregar
         let botones_eliminar = document.getElementsByClassName("btn_eliminar");
         for(let element of botones_eliminar){
@@ -200,31 +191,62 @@ function agregar(e){
     }
 }
 
-//agrego al carrito los productos que esten en el session storage si es el caso
-let storage_recuperado = JSON.parse(sessionStorage.getItem("productos_elegidos"));
-for(const producto of storage_recuperado){
-    const tr_producto_elegido = document.createElement('tr');    
-    carrito.append(tr_producto_elegido);
-    tr_producto_elegido.innerHTML = 
-        `<td><img class="imagen_producto_elegido" src="${producto.ubicacion_imagen}"></img></td>
-        <td>${producto.nombre}</td>
-        <td>$${producto.precio}</td>
-        <td> <button class="btn btn-danger btn_eliminar" value="${producto.precio}" id="${producto.codigo}">Eliminar</button> </td>`
-    //agrego el precio al arreglo subtotal
-    subtotal.push(producto.precio);
-    //cambio el texto donde va el calculo total, poninendo el return de la funcion que lo calcula
-    let precio_total = document.getElementById("precio_total");
-    precio_total.innerText = "$" + calculo_total();
-    //agregar al storage
-    let producto_elegido = {nombre:producto.nombre, precio:producto.precio, ubicacion_imagen:producto.ubicacion_imagen, codigo:producto.codigo}
-    storage.push(producto_elegido);
-    sessionStorage.setItem("productos_elegidos", JSON.stringify(storage))
-    //funcion al boton agregar
-    let botones_eliminar = document.getElementsByClassName("btn_eliminar");
-    for(let element of botones_eliminar){
-        element.addEventListener("click", eliminar);
-    }
+//variable para el contador del carrito, primero recupero del storage si habían productos
+if(storage_recuperado != null){
+    let contador_carrito = storage_recuperado.length;
+    console.log(contador_carrito)
+}else{
+    let contador_carrito = 0;
+    console.log(contador_carrito)
 }
+
+
+//funcion agregar al carrito
+function agregar(e){
+    for(const producto of lista_productos){
+        //comparo el id que se puso antes en funcion del codigo de cada producto para acceder al producto elegido
+        if(e.target.id == producto.codigo){
+        const tr_producto_elegido = document.createElement('tr');    
+        carrito.append(tr_producto_elegido);
+        tr_producto_elegido.innerHTML = 
+            `<td><img class="imagen_producto_elegido" src="${producto.ubicacion_imagen}"></img></td>
+            <td>${producto.nombre}</td>
+            <td>$${producto.precio}</td>
+            <td> <button class="btn btn-danger btn_eliminar" value="${producto.precio}" id="${producto.codigo}">Eliminar</button> </td>`
+
+        //agrego el precio al arreglo subtotal
+        subtotal.push(producto.precio);
+
+        //cambio el texto donde va el calculo total, poninendo el return de la funcion que lo calcula
+        let precio_total = document.getElementById("precio_total");
+        precio_total.innerText = "$" + calculo_total();
+
+        //notificacion
+        Toastify({
+            text: "Agregaste un producto al carrito",
+            duration: 900,
+            style: {
+                background: "#04547c",
+            }
+        }) .showToast();
+
+        //agregar al storage
+        let producto_elegido = {nombre:producto.nombre, precio:producto.precio, ubicacion_imagen:producto.ubicacion_imagen, codigo:producto.codigo}
+        storage.push(producto_elegido);
+        sessionStorage.setItem("productos_elegidos", JSON.stringify(storage))
+        }
+
+        //funcion al boton agregar
+        let botones_eliminar = document.getElementsByClassName("btn_eliminar");
+        for(let element of botones_eliminar){
+            element.addEventListener("click", eliminar);
+        }
+    }
+    //paso la cantidad de productos (largo del arreglo storage) al contador de productos
+    contador_carrito = storage.length
+    console.log(contador_carrito)
+}
+
 
 //funcion que suma los precios en el arreglo subtotal
 function calculo_total(){
@@ -236,21 +258,31 @@ function calculo_total(){
 }
 //funcion para ELIMINAR del carrito
 function eliminar(e){
-    
     //eliminar del arreglo storage
+    //tomo el id que se puso en el boton eliminar
     codigo_para_eliminar = e.target.id
+    //entro en un for en  la lista original para obetner el nombre del producto que tenga el mismo código
     for(const producto of lista_productos){
         if(codigo_para_eliminar == producto.codigo){
             let nombre_para_eliminar = producto.nombre;
+            //con un for entro a la variable storage y elimino el que tenga el nombre obtenido
+            let a = 0;
+            while(a<1){
             for(const element of storage){
                 if(nombre_para_eliminar == element.nombre){
                     let i = storage.indexOf(element);
                     storage.splice(i,1);
+                    a++;
                 }
+            }
             }
         }
     }
     sessionStorage.setItem("productos_elegidos", JSON.stringify(storage))
+
+    //paso la cantidad de productos (largo del arreglo storage) al contador de productos
+    contador_carrito = storage.length
+    console.log(contador_carrito)
 
     //capturo el nodo donde esta toda la info del producto y elimino
     let abuelo = e.target.parentNode.parentNode
@@ -264,11 +296,11 @@ function eliminar(e){
     //cambio el texto donde va el calculo total, poninendo el return de la funcion que lo calcula
     let precio_total = document.getElementById("precio_total");
     precio_total.innerText = "$" + calculo_total();
-
+    
     //notificacion
     Toastify({
         text: "Eliminaste un producto del carrito",
-        duration: 1500,
+        duration: 900,
         style: {
             background: "red",
         }

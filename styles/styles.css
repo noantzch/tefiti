@@ -156,3 +156,7 @@ td{
 footer{
     text-align: center;
 }
+.badge{
+    font-size: 0.4em;
+    transform: -2em;
+}
