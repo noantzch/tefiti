@@ -202,27 +202,29 @@ function agregar(e){
 
 //agrego al carrito los productos que esten en el session storage si es el caso
 let storage_recuperado = JSON.parse(sessionStorage.getItem("productos_elegidos"));
-for(const producto of storage_recuperado){
-    const tr_producto_elegido = document.createElement('tr');    
-    carrito.append(tr_producto_elegido);
-    tr_producto_elegido.innerHTML = 
-        `<td><img class="imagen_producto_elegido" src="${producto.ubicacion_imagen}"></img></td>
-        <td>${producto.nombre}</td>
-        <td>$${producto.precio}</td>
-        <td> <button class="btn btn-danger btn_eliminar" value="${producto.precio}" id="${producto.codigo}">Eliminar</button> </td>`
-    //agrego el precio al arreglo subtotal
-    subtotal.push(producto.precio);
-    //cambio el texto donde va el calculo total, poninendo el return de la funcion que lo calcula
-    let precio_total = document.getElementById("precio_total");
-    precio_total.innerText = "$" + calculo_total();
-    //agregar al storage
-    let producto_elegido = {nombre:producto.nombre, precio:producto.precio, ubicacion_imagen:producto.ubicacion_imagen, codigo:producto.codigo}
-    storage.push(producto_elegido);
-    sessionStorage.setItem("productos_elegidos", JSON.stringify(storage))
-    //funcion al boton agregar
-    let botones_eliminar = document.getElementsByClassName("btn_eliminar");
-    for(let element of botones_eliminar){
-        element.addEventListener("click", eliminar);
+if(typeof(storage_recuperado) == "object"){
+    for(const producto of storage_recuperado){
+        const tr_producto_elegido = document.createElement('tr');    
+        carrito.append(tr_producto_elegido);
+        tr_producto_elegido.innerHTML = 
+            `<td><img class="imagen_producto_elegido" src="${producto.ubicacion_imagen}"></img></td>
+            <td>${producto.nombre}</td>
+            <td>$${producto.precio}</td>
+            <td> <button class="btn btn-danger btn_eliminar" value="${producto.precio}" id="${producto.codigo}">Eliminar</button> </td>`
+        //agrego el precio al arreglo subtotal
+        subtotal.push(producto.precio);
+        //cambio el texto donde va el calculo total, poninendo el return de la funcion que lo calcula
+        let precio_total = document.getElementById("precio_total");
+        precio_total.innerText = "$" + calculo_total();
+        //agregar al storage
+        let producto_elegido = {nombre:producto.nombre, precio:producto.precio, ubicacion_imagen:producto.ubicacion_imagen, codigo:producto.codigo}
+        storage.push(producto_elegido);
+        sessionStorage.setItem("productos_elegidos", JSON.stringify(storage))
+        //funcion al boton agregar
+        let botones_eliminar = document.getElementsByClassName("btn_eliminar");
+        for(let element of botones_eliminar){
+            element.addEventListener("click", eliminar);
+        }
     }
 }
 
