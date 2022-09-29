@@ -1,7 +1,7 @@
-//CARRITO
-//boton de carrito
+//BOTON CARRITO
 let btn_carrito = document.getElementById("btn_carrito");
 let carritoInner = document.getElementById("carritoInner");
+//hago un contador de clicks para aplicar clases de mostrar y nomostrar el carrito
 let contador_clicks = 0;
 btn_carrito.addEventListener("click", function(e){
     if(contador_clicks == 0){
@@ -19,6 +19,7 @@ btn_carrito.addEventListener("click", function(e){
     }
 })
 
+//IMPRESION DE LA LISTA DE PRODUCTOS 
 //capturo tabla del html donde iran los productos elegidos
 const carrito = document.getElementById("carrito")
 //creo un arreglo donde irán los precios de cada producto para sumarse al final 
@@ -162,8 +163,8 @@ function agregar_filtro (e){
         }
     }
 }
-
-//agrego al carrito los productos que esten en el session storage si es el caso
+//RETOMAR STORAGE EL CARRITO
+//agrego al carrito los productos que esten en el session STORAGE si es el caso
 let storage_recuperado = JSON.parse(sessionStorage.getItem("productos_elegidos"));
 if(storage_recuperado != null){
     for(const producto of storage_recuperado){
@@ -189,8 +190,10 @@ if(storage_recuperado != null){
             element.addEventListener("click", eliminar);
         }
     }
+    //mostrar boton comprar
+    btn_comprar.classList.remove("nomostrar")
 }
-
+//contador de productos en el carrito
 //obtengo el elemeto html donde va el contador del carrito
 let contador_carrito_html = document.getElementById("contador_productos")
 //variable para el contador del carrito, primero recupero del storage si habían productos
@@ -212,8 +215,10 @@ if(storage_recuperado != null){
     }
 }
 
+//boton COMPRAR
+btn_comprar = document.getElementById("btn_comprar")
 
-//funcion agregar al carrito
+//AGREGAR
 function agregar(e){
     for(const producto of lista_productos){
         //comparo el id que se puso antes en funcion del codigo de cada producto para acceder al producto elegido
@@ -264,7 +269,8 @@ function agregar(e){
     }else{
         contador_carrito_html.classList.remove("nomostrar")
     } 
-    
+    //mostrar boton comprar
+    btn_comprar.classList.remove("nomostrar")
 }
 
 
@@ -276,7 +282,8 @@ function calculo_total(){
     }
     return resultado_total
 }
-//funcion para ELIMINAR del carrito
+
+//ELIMINAR
 function eliminar(e){
     //eliminar del arreglo storage
     //tomo el id que se puso en el boton eliminar
@@ -331,4 +338,16 @@ function eliminar(e){
             background: "red",
         }
     }) .showToast();
+
+    //ocultar boton comprar si ya no hay productos
+    if(storage.length<1){
+        btn_comprar.classList.add("nomostrar")
+    }
 }
+
+
+/*btn_carrito.addEventListener("click", comprar)
+//funcion comprar
+function comprar(){
+
+}*/
