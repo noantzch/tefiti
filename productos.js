@@ -254,7 +254,7 @@ function agregar(e){
         }
         
 
-        //funcion al boton agregar
+        //funcion al boton eliminar
         let botones_eliminar = document.getElementsByClassName("btn_eliminar");
         for(let element of botones_eliminar){
             element.addEventListener("click", eliminar);
@@ -348,7 +348,9 @@ function eliminar(e){
 //COMPRAR
 btn_comprar = document.getElementById("btn_comprar")
 btn_comprar.addEventListener("click", comprar)
+
 function comprar(){
+
     let productos_container = document.getElementById("productos_container");
     //quito el boton del carrito
     btn_carrito.classList.add("nomostrar")
@@ -400,10 +402,11 @@ function comprar(){
                                                     </div>
                                                 </div
                                                 <div class="form-group">
-                                                    <button class="btn btn-danger id="confirmar_compra">Confirmar Compra</button>
+                                                    <button class="btn btn-danger" id="confirmar_compra">Confirmar Compra</button>
                                                 </div>
                                             </div>
                                         </div>`
+    //imprimo los productos elegidos para pagar que estan guardados en la variable storage
     productos_a_pagar = document.getElementById("productos_a_pagar");
     for(element of storage){
         const tr_producto_a_pagar = document.createElement('tr');    
@@ -413,5 +416,24 @@ function comprar(){
         <td>${element.nombre}</td>
         <td>$${element.precio}</td>`
     }
+    //tomo el boton de confirmar compra
+    let btn_confirmar_compra = document.getElementById("confirmar_compra")
+    btn_confirmar_compra.addEventListener("click", confirmacion);
 }
-//falta confirmar compra y armar las paginas en construccion
+//funcion confirmacion
+function confirmacion(){
+    Swal.fire({
+        title: 'Compra Realizada',
+        text: "Tus Datos son los siguientes: -......",
+        icon: 'success',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'Volver al inicio'
+        }).then((result) => {
+        if (result.isConfirmed) {
+            location.href = "index.html"
+            //vaciar variable storage y session storage
+            storage = [];
+            sessionStorage.removeItem("productos_elegidos")
+        }
+        })
+}
