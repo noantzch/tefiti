@@ -191,7 +191,9 @@ if(storage_recuperado != null){
         }
     }
     //mostrar boton comprar
+    if(storage_recuperado.length>0){
     btn_comprar.classList.remove("nomostrar")
+    }
 }
 //contador de productos en el carrito
 //obtengo el elemeto html donde va el contador del carrito
@@ -217,6 +219,10 @@ if(storage_recuperado != null){
 
 //boton COMPRAR
 btn_comprar = document.getElementById("btn_comprar")
+btn_comprar.addEventListener("click", comprar)
+function comprar(){
+    alert("HOLIS")
+}
 
 //AGREGAR
 function agregar(e){
