@@ -422,9 +422,11 @@ function comprar(){
 }
 //funcion confirmacion
 function confirmacion(){
+    let nombre = document.getElementById("nombre").value;
+    let mail = document.getElementById("email").value;
     Swal.fire({
         title: 'Compra Realizada',
-        text: "Tus Datos son los siguientes: -......",
+        text: "Gracias por tu compra " + nombre + ". Enviaremos toda la información a tu mail: " + mail,
         icon: 'success',
         confirmButtonColor: '#3085d6',
         confirmButtonText: 'Volver al inicio'
