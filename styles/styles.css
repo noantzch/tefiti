@@ -162,3 +162,60 @@ footer{
     font-size: 0.4em;
     transform: -2em;
 }
+#finalizarcompra_container{
+    background-color: #04bc94;
+    width: 100%;
+    padding: 2em;
+    color: white;
+}
+#datos_de_tarjeta{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#tarjeta{
+    background-color: #04547c;
+    border-radius: 1em;
+    width: 60%;
+    margin: 1em;
+}
+#tarjeta_derecha{
+    display: flex;
+    flex-direction: column;
+    padding-top: 4em;
+    padding-bottom: 1em;
+}
+#tarjeta_izq{
+    display: flex;
+    flex-direction: column;
+    padding-top: 7em;
+}
+@media(max-width: 768px){
+    #tarjeta{
+        width: 100%;
+    }
+    #tarjeta_derecha{
+        font-size: 0.7em;
+        width: 45%;
+    }
+    #tarjeta_izq{
+        font-size: 0.7em;
+        width: 28%;
+    }
+    input{
+        font-size: 0.7em;
+    }
+}
+input{
+    background-color: #04405d;
+    color: white;
+    width: -webkit-fill-available;
+}
+#total_a_pagar{
+    padding: 0.4em;
+    background-color: white;
+    color: #04bc94;
+    font-weight: bold;
+    width: fit-content;
+    border-radius: 0.7em;
+}

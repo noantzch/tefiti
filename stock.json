@@ -38,7 +38,7 @@
         "codigo": 6,
         "nombre": "Sahumerios Naturales",
         "tipo": "Sahumerios",
-        "precio": 5400,
+        "precio": 400,
         "ubicacion_imagen": "./images/sahumerios/sahumerio_inciensonatural.png"
     },
     {

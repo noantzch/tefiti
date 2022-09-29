@@ -217,12 +217,6 @@ if(storage_recuperado != null){
     }
 }
 
-//boton COMPRAR
-btn_comprar = document.getElementById("btn_comprar")
-btn_comprar.addEventListener("click", comprar)
-function comprar(){
-    alert("HOLIS")
-}
 
 //AGREGAR
 function agregar(e){
@@ -351,9 +345,73 @@ function eliminar(e){
     }
 }
 
-
-/*btn_carrito.addEventListener("click", comprar)
-//funcion comprar
+//COMPRAR
+btn_comprar = document.getElementById("btn_comprar")
+btn_comprar.addEventListener("click", comprar)
 function comprar(){
-
-}*/
+    let productos_container = document.getElementById("productos_container");
+    //quito el boton del carrito
+    btn_carrito.classList.add("nomostrar")
+    carritoInner.classList.add("nomostrar")
+    //relleno el neuvo elemento que remplaza la lista de productos, donde va la lista de productos seleccionados que estan guardados en la variable storage y hago un formulario para los datos del comprador
+    productos_container.innerHTML = `<div class="d-flex justify-content-between row" id="finalizarcompra_container">
+                                        <div class="col-md-4">
+                                            <div id="productos_a_pagar"></div>
+                                            <hr>
+                                            <h3 id="total_a_pagar">TOTAL: $ ${calculo_total()}</h3>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <div id="datos_personales">
+                                                <h3>Datos Personales</h3>
+                                                <form>
+                                                    <div class="from-group">
+                                                        <label for="nombre">Nombre y Apellido</label>
+                                                        <input class="form-control" type="text" id="nombre" value="Ingrese su nombre completo">
+                                                    </div>
+                                                    <div class="from-group">
+                                                        <label for="email">Email</label>
+                                                        <input class="form-control" type="email" id="email" value="ejemplo@email.com">
+                                                    </div>
+                                                    <div class="from-group">
+                                                        <label class="w-100" for="telefono">Teléfono</label>
+                                                        <input class="form-control" type="text" value="1234567" id="tel">
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <hr>
+                                            <div id="datos_de_tarjeta">
+                                                <h3>Datos de la tarjeta</h3>
+                                                <div class="row justify-content-between" id="tarjeta">
+                                                    <div class="col-md-7" id="tarjeta_derecha">
+                                                        <label for="tarjetanumero">Número de tarjeta:</label>
+                                                        <input type="text" value="1234-5678-9123-4567">
+                                                        <label for="tarjetanombre">Nombre y Apellido</label>
+                                                        <input type="text" value="APELLIDO Y NOMBRE">
+                                                        <label for="cvc">CVC</label>
+                                                        <input type="text" value="000">
+                                                    </div>
+                                                    <div class="col-md-4" id="tarjeta_izq">
+                                                        <div class="row">
+                                                            <div class="col-md-6" id="vencimiento">
+                                                                <label for="vencimiento">Vencimiento</label>
+                                                                <input type="text" value="00/00">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div
+                                                <div class="form-group">
+                                                    <button class="btn btn-danger id="confirmar_compra">Confirmar Compra</button>
+                                                </div>
+                                            </div>
+                                        </div>`
+    productos_a_pagar = document.getElementById("productos_a_pagar");
+    for(element of storage){
+        const tr_producto_a_pagar = document.createElement('tr');    
+        productos_a_pagar.append(tr_producto_a_pagar);
+        tr_producto_a_pagar.innerHTML = 
+        `<td><img class="imagen_producto_elegido" src="${element.ubicacion_imagen}"></img></td>
+        <td>${element.nombre}</td>
+        <td>$${element.precio}</td>`
+    }
+}
+//falta confirmar compra y armar las paginas en construccion
